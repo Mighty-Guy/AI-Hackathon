@@ -4,7 +4,7 @@ api = SoundcloudAPI()  # never pass a Soundcloud client ID that did not come fro
 interpret = 'itsmeneedle'
 song = 'sunday-morning'
 
-track = api.resolve('https://soundcloud.com/' + interpret + '/')
+track = api.resolve('https://soundcloud.com/' + interpret + '/' + song)
 
 assert type(track) is Track
 

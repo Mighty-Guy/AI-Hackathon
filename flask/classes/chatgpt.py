@@ -3,14 +3,14 @@ import yaml
 from yaml.loader import SafeLoader
 
 initPrompt = [
-    {"role": "system", "content": "You are a storyteller. Generate a text-based game adventure with 10 stages and 4 options per stage. Wait for my response at every stage."}
+    {"role": "system", "content": "You are a storyteller. Generate a text-based game adventure with multiple stages. I can make decisions with free text. Wait for my decision at every stage."}
 ]
 
 
 class ChatGPT():
     def __init__(self):
         # Reading YAML data
-        file_name = './resources/secrets.yml'
+        file_name = 'flask/resources/secrets.yml'
         with open(file_name, 'r') as f:
             secrets = yaml.load(f, Loader=SafeLoader)
         openai.api_key = secrets['chatgpt']

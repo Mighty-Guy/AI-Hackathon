@@ -10,7 +10,7 @@ initPrompt = [
 class ChatGPT():
     def __init__(self):
         # Reading YAML data
-        file_name = './resources/secrets.yml'
+        file_name = 'flask/resources/secrets.yml'
         with open(file_name, 'r') as f:
             secrets = yaml.load(f, Loader=SafeLoader)
         openai.api_key = secrets['chatgpt']

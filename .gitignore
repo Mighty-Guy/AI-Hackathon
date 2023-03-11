@@ -3,3 +3,5 @@
 /.idea/modules.xml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
+dash/components/__pycache__/navbar.cpython-310.pyc
+dash/__pycache__/chatgpt.cpython-310.pyc

@@ -7,14 +7,21 @@ game_options = {0: 'random', 1: 'adventure', 2: 'sci-fy'}
 
 
 @app.route('/')
-def record():
+def index():
     return render_template('index.html', game_options=game_options)
 
+@app.route('/play')
+def play():
+    #add chatgpt
+    #play sound
+    #styling
+    return render_template('play.html')
 
 @app.route('/save-audio', methods=['POST'])
 def save_audio():
     file = request.files['audio']
     file.save('audio.webm')
+    #
     return 'OK'
 
 @app.route('/audio/<path:path>')

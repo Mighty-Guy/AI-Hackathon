@@ -1,27 +1,43 @@
-import os
+import time
 import openai
 import yaml
 from yaml.loader import SafeLoader
 
 # Reading YAML data
-file_name = 'aihackaton/secrets.yml'
+file_name = 'dash/secrets.yml'
 with open(file_name, 'r') as f:
     secrets = yaml.load(f, Loader=SafeLoader)
-
-
-
 openai.api_key = secrets['chatgpt']
 
 
-def get_response(prompt):
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        temperature=0.9,
-        max_tokens=150,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0.6,
-        stop=["\n", " Human:", " AI:"]
-    )
-    return response['choices'][0]['text']
+class ChatGPT():
+    def __init__(self):
+        self.conversation = [
+            {"role": "system", "content": "You are a storyteller. Generate a text-based game adventure with 10 stages and 4 options per stage. Wait for my response at every stage."}
+        ]
+
+    def get_response(self, prompt):
+        self.conversation.append({"role": "user", "content": prompt})
+        response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=self.conversation,    
+        )
+        result = ''
+        for choice in response.choices:
+            result += choice.message.content
+        self.conversation.append({"role": "system", "content": result})
+        return result
+
+    def get_conversation(self):
+        return self.conversation
+    
+    def reset_conversation(self):
+        self.conversation = [
+            {"role": "system", "content": "You are a storyteller. Generate a text-based game adventure with 10 stages and 4 options per stage. Wait for my response at every stage."}
+        ]
+    
+chat = ChatGPT()
+chat.get_response("Start game")
+chat.get_response("Take option 1")
+
+print(chat.get_conversation())

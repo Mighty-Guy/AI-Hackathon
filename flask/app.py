@@ -12,6 +12,11 @@ def index():
 
 @app.route('/play')
 def play():
+    if 'game_option' in request.args:
+        option = request.args['game_option']
+    else:
+        option = 0 # default is random
+
     #add chatgpt
     #play sound
     #styling

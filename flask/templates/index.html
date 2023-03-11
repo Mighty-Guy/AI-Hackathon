@@ -15,26 +15,24 @@
     </nav>
 
    <div class="container mt-5">
-	   <form action="/start game" method="post">
+	   <form action="/play" method="get">
 
 		   <div class="row justify-content-center">
 			   <div class="btn-group btn-group-toggle" data-toggle="buttons">
 				   {% for game_option in game_options %}
 						<label class="col-3 col-md-3 btn btn-light">
-						   <input type="radio" name="color" value="1" autocomplete="off"> {{ game_options[game_option] }}
+						   <input type="radio" name="game_option" value="{{ game_option }}" autocomplete="off"> {{ game_options[game_option] }}
 					   </label>
 				  {% endfor %}
 
 			   </div>
 		   </div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center mt-2">
 				<div class="col">
-					<a class="btn btn-primary" href="play.html">Play the game</a>
+					<button class="btn btn-primary" type="submit" >Play the game</button>
 				</div>
 			</div>
 	   </form>
-
-
 
    </div>
 

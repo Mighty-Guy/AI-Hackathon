@@ -1,12 +1,15 @@
 import replicate
+import os
+
+#Set the REPLICATE_API_TOKEN environment variable
+os.environ["REPLICATE_API_TOKEN"] = "5f07fcf4710846c9b121590ac338ff2e2ffa676d"
 
 model = replicate.models.get("openai/whisper")
 version = model.versions.get("e39e354773466b955265e969568deb7da217804d8e771ea8c9cd0cef6591f8bc")
-
 # https://replicate.com/openai/whisper/versions/e39e354773466b955265e969568deb7da217804d8e771ea8c9cd0cef6591f8bc#input
 inputs = {
     # Audio file
-    # 'audio': open("path/to/file", "rb"),
+     'audio': open("test-resources/America_Safe!_(James_W._Gerard).ogg.mp3", "rb"),
 
     # Choose a Whisper model.
     'model': "large-v2",

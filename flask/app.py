@@ -22,6 +22,7 @@ def play():
     else:
         option = 0 # default is random
 
+
     #add chatgpt
     #play sound
     #styling

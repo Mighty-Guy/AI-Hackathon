@@ -1,4 +1,3 @@
-import time
 import openai
 import yaml
 from yaml.loader import SafeLoader
@@ -51,9 +50,8 @@ class ChatGPT():
         self.conversation = initPrompt
 
 
-chat = ChatGPT()
-chat.get_story("Start game")
+# chat = ChatGPT()
+# chat.get_story("Start game")
 # chat.get_response("Take option 1")
-print(chat.get_music())
-
+# print(chat.get_music())
 # print(chat.get_conversation())

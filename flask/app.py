@@ -19,9 +19,9 @@ def play():
     else:
         option = 0 # default is random
 
-    #add chatgpt
-    #play sound
-    #styling
+    # add chatgpt
+    # play sound
+    # styling
     return render_template('play.html')
 
 @app.route('/save-audio', methods=['POST'])

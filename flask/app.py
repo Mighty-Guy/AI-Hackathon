@@ -1,5 +1,6 @@
 from flask import Flask, request, send_from_directory, render_template
 from classes.chatgpt import ChatGPT
+from classes.whisper import Whisper
 
 from classes.t2s import T2S
 
@@ -32,7 +33,11 @@ def play():
 def save_audio():
     file = request.files['audio']
     file.save('audio.webm')
-    #
+    whipser = Whisper()
+    text = whipser.set_input('audio.webm')
+    print(text)
+    game_text = chat.get_story(text)
+    print(game_text)
     return 'OK'
 
 @app.route('/audio/<path:text>')

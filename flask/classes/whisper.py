@@ -18,7 +18,7 @@ class Whisper:
 
         self.inputs = {
             # Audio file
-            'audio': open("test-resources/Kennedy_berliner.ogg.mp3", "rb"),
+            'audio': "",
 
             # Choose a Whisper model.
             'model': "large-v2",

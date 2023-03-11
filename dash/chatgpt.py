@@ -3,15 +3,13 @@ import openai
 import yaml
 from yaml.loader import SafeLoader
 
-# Reading YAML data
-file_name = 'dash/secrets.yml'
-with open(file_name, 'r') as f:
-    secrets = yaml.load(f, Loader=SafeLoader)
-openai.api_key = secrets['chatgpt']
-
-
 class ChatGPT():
     def __init__(self):
+        # Reading YAML data
+        file_name = 'dash/secrets.yml'
+        with open(file_name, 'r') as f:
+            secrets = yaml.load(f, Loader=SafeLoader)
+        openai.api_key = secrets['chatgpt']
         self.conversation = [
             {"role": "system", "content": "You are a storyteller. Generate a text-based game adventure with 10 stages and 4 options per stage. Wait for my response at every stage."}
         ]

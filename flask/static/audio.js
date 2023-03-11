@@ -31,6 +31,7 @@ let mediaRecorder;
                 // audioPlayer.src = URL.createObjectURL(blob);
                 audioPlayer.controls = true;
                 audioPlayer.autoplay = true;
+                audioPlayer.hidden = true;
                 document.body.appendChild(audioPlayer);
               } else {
                 console.error('Failed to save audio');

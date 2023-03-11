@@ -98,7 +98,7 @@ myobj = gTTS(text=mytext, lang=language, slow=False, tld='us')
 
 # Saving the converted audio in a mp3 file named
 # welcome
-myobj.save("test-resources/test_output.mp3")
+myobj.save("test-resources/to_speech.mp3")
 
 # Playing the converted file
-os.system("start test-resources/test_output.mp3")
+os.system("start test-resources/to_speech.mp3")

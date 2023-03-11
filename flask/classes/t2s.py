@@ -14,6 +14,6 @@ class T2S:
     def set_tld(self, new_tld):
         self.tld = new_tld
 
-    def get_speech(self, text):
+    def get_speech(self, text, path):
         obj = gTTS(text=text, lang=self.language, slow=self.slow, tld=self.tld)
-        obj.save("resource/to_speech.mp3")
+        obj.save(path)

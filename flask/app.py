@@ -16,7 +16,7 @@ def save_audio():
 
 @app.route('/audio/<path:path>')
 def serve_audio(path):
-    return send_from_directory('.', path)
+    return send_from_directory('../test-resources/', 'Kennedy_berliner.ogg.mp3')
 
 if __name__ == '__main__':
     app.run()

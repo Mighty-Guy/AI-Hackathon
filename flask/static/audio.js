@@ -27,9 +27,10 @@ let mediaRecorder;
             .then(response => {
               if (response.ok) {
                 console.log('Audio saved successfully');
-                const audioPlayer = document.createElement('audio');
-                audioPlayer.src = URL.createObjectURL(blob);
+                const audioPlayer = new Audio('/audio/my-audio-file.mp3');
+                // audioPlayer.src = URL.createObjectURL(blob);
                 audioPlayer.controls = true;
+                audioPlayer.autoplay = true;
                 document.body.appendChild(audioPlayer);
               } else {
                 console.error('Failed to save audio');
@@ -52,3 +53,4 @@ let mediaRecorder;
         stopBtn.disabled = true;
         mediaRecorder.stop();
       });
+

@@ -11,7 +11,7 @@ def record():
 @app.route('/save-audio', methods=['POST'])
 def save_audio():
     file = request.files['audio']
-    file.save('audio-sabrina.webm')
+    file.save('audio.webm')
     return 'OK'
 
 @app.route('/audio/<path:path>')

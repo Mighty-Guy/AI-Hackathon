@@ -38,13 +38,13 @@ def save_audio():
     print(text)
     game_text = chat.get_story(text)
     print(game_text)
+    t2s = T2S()
+    t2s.get_speech(game_text, './resources/audio-answer.mp3')
     return 'OK'
 
 @app.route('/audio/<path:text>')
 def serve_audio(text):
-    t2s = T2S()
-    t2s.get_speech(text, "resources/test1234.mp3")
-    return send_from_directory('./resources/', "test1234.mp3")
+    return send_from_directory('./resources/', "audio-answer.mp3")
 
 if __name__ == '__main__':
     app.run()

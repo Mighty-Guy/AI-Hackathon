@@ -3,9 +3,12 @@ from flask import Flask, request, send_from_directory, render_template
 
 app = Flask(__name__)
 
+game_options = {0: 'random', 1: 'adventure', 2: 'sci-fy'}
+
+
 @app.route('/')
 def record():
-    return render_template('record.html')
+    return render_template('index.html', game_options=game_options)
 
 
 @app.route('/save-audio', methods=['POST'])

@@ -1,12 +1,42 @@
-<main class="content">
-	<h1>How to use JavaScript for Text to Speech</h1>
-	<p>You start by defining the content.</p>
-	<p>Then you pass this into the API.</p>
-</main>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ChatQuest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar bg-dark" data-bs-theme="dark">
+      <div class="row justify-content-center">
+        <div class="col">
+          <h2>ChatQuest</h2>
+        </div>
+      </div>
+    </nav>
 
-<select name="voices" id="voices">
+   <div class="container mt-5">
+	   <form action="/start game" method="post">
 
-</select>
+		   <div class="row justify-content-center">
+			   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+				   {% for game_option in game_options %}
+						<label class="col-3 col-md-3 btn btn-light">
+						   <input type="radio" name="color" value="1" autocomplete="off"> {{ game_options[game_option] }}
+					   </label>
+				  {% endfor %}
 
-<button id="speak">Play</button>
-<button id="pause">Pause</button>
+			   </div>
+		   </div>
+			<div class="row justify-content-center">
+				<div class="col">
+					<a class="btn btn-primary" href="play.html">Play the game</a>
+				</div>
+			</div>
+	   </form>
+
+
+
+   </div>
+
+  </body>
+</html>

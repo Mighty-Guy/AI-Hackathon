@@ -4,4 +4,4 @@ import wave
 
 @app.route('/record')
 def record():
-    return render_template('record.html')
+    return render_template('play.html')

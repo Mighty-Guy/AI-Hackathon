@@ -1,0 +1,8 @@
+.corner-element {
+    position: fixed;
+    top: 50px;
+    right: 0;
+    padding: 10px;
+    background-color: #ccc;
+    color: #333;
+}

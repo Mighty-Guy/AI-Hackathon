@@ -9,7 +9,7 @@ class Whisper:
 
     def __init__(self):
         # Reading YAML data
-        file_name = 'dash/secrets.yml'
+        file_name = './resources/secrets.yml'
         with open(file_name, 'r') as f:
             secrets = yaml.load(f, Loader=SafeLoader)
         os.environ["REPLICATE_API_TOKEN"] = secrets['whisper']

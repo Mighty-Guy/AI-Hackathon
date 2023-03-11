@@ -7,3 +7,4 @@ dash/components/__pycache__/navbar.cpython-310.pyc
 flask/__pycache__/*
 dash/__pycache__/*
 flask/classes/__pycache__/*
+**__pycache__/*

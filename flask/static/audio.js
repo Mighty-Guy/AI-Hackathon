@@ -27,7 +27,7 @@ let mediaRecorder;
             .then(response => {
               if (response.ok) {
                 console.log('Audio saved successfully');
-                const audioPlayer = new Audio('/audio/my-audio-file.mp3');
+                const audioPlayer = new Audio('/audio/The best text ever');
                 // audioPlayer.src = URL.createObjectURL(blob);
                 audioPlayer.controls = true;
                 audioPlayer.autoplay = true;

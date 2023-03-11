@@ -1,6 +1,8 @@
 
 from flask import Flask, request, send_from_directory, render_template
 
+from classes.t2s import T2S
+
 app = Flask(__name__)
 
 game_options = {0: 'random', 1: 'adventure', 2: 'sci-fy'}
@@ -26,12 +28,13 @@ def play():
 def save_audio():
     file = request.files['audio']
     file.save('audio.webm')
-    #
     return 'OK'
 
-@app.route('/audio/<path:path>')
-def serve_audio(path):
-    return send_from_directory('../test-resources/', 'Kennedy_berliner.ogg.mp3')
+@app.route('/audio/<path:text>')
+def serve_audio(text):
+    t2s = T2S()
+    t2s.get_speech(text, "resources/test1234.mp3")
+    return send_from_directory('./resources/', "test1234.mp3")
 
 if __name__ == '__main__':
     app.run()

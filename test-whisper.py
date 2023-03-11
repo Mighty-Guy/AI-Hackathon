@@ -1,15 +1,23 @@
 import replicate
 import os
 
+import yaml
+from yaml.loader import SafeLoader
+
+# Reading YAML data
+file_name = 'dash/secrets.yml'
+with open(file_name, 'r') as f:
+    secrets = yaml.load(f, Loader=SafeLoader)
+
 #Set the REPLICATE_API_TOKEN environment variable
-os.environ["REPLICATE_API_TOKEN"] = "5f07fcf4710846c9b121590ac338ff2e2ffa676d"
+os.environ["REPLICATE_API_TOKEN"] = secrets['whisper']
 
 model = replicate.models.get("openai/whisper")
 version = model.versions.get("e39e354773466b955265e969568deb7da217804d8e771ea8c9cd0cef6591f8bc")
 # https://replicate.com/openai/whisper/versions/e39e354773466b955265e969568deb7da217804d8e771ea8c9cd0cef6591f8bc#input
 inputs = {
     # Audio file
-     'audio': open("test-resources/America_Safe!_(James_W._Gerard).ogg.mp3", "rb"),
+     'audio': open("test-resources/Kennedy_berliner.ogg.mp3", "rb"),
 
     # Choose a Whisper model.
     'model': "large-v2",
@@ -66,3 +74,31 @@ inputs = {
 # https://replicate.com/openai/whisper/versions/e39e354773466b955265e969568deb7da217804d8e771ea8c9cd0cef6591f8bc#output-schema
 output = version.predict(**inputs)
 print(output)
+print(output.get("transcription"))
+
+# Import the required module for text
+# to speech conversion
+from gtts import gTTS
+
+# This module is imported so that we can
+# play the converted audio
+import os
+
+# The text that you want to convert to audio
+mytext = output.get("transcription")
+
+# Language in which you want to convert
+language = "en"
+
+# Passing the text and language to the engine,
+# here we have marked slow=False. Which tells
+# the module that the converted audio should
+# have a high speed
+myobj = gTTS(text=mytext, lang=language, slow=False, tld='us')
+
+# Saving the converted audio in a mp3 file named
+# welcome
+myobj.save("test-resources/test_output.mp3")
+
+# Playing the converted file
+os.system("start test-resources/test_output.mp3")

@@ -68,9 +68,8 @@ navigator.mediaDevices.getUserMedia({audio: true})
                 .then(response => {
                     if (response.ok) {
                         this.updateChat();
-                        this.audioPlayer.load();
-                        this.audioPlayer.autoplay = true;
-                        this.audioPlayer.play();
+                        audioPlayer.load();
+                        audioPlayer.autoplay = true;
                     } else {
                         console.error('Failed to save audio');
                     }

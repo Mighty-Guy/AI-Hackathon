@@ -1,5 +1,5 @@
 from gtts import gTTS
-
+import os
 
 class T2S:
     def __init__(self):
@@ -15,5 +15,7 @@ class T2S:
         self.tld = new_tld
 
     def get_speech(self, text, path):
+        if os.path.exists(path):
+            os.remove(path)
         obj = gTTS(text=text, lang=self.language, slow=self.slow, tld=self.tld)
         obj.save(path)

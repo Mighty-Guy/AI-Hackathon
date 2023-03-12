@@ -1,8 +1,34 @@
 .corner-element {
     position: fixed;
-    top: 50px;
-    right: 0;
+    top: 70px;
+    right: 250px;
     padding: 10px;
     background-color: #ccc;
     color: #333;
+}
+
+.vh100 {
+    height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: black;
+  color: white;
+}
+
+.sidebar a {
+    padding: 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
 }

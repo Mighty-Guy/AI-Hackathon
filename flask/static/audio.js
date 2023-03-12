@@ -68,8 +68,7 @@ navigator.mediaDevices.getUserMedia({audio: true})
                 .then(response => {
                     if (response.ok) {
                         this.updateChat();
-
-                        this.audioPlayer.src('/audio/The best text ever')
+                        this.audioPlayer.load()
                         this.audioPlayer.play()
                     } else {
                         console.error('Failed to save audio');

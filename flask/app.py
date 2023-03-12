@@ -13,6 +13,9 @@ game_options = {0: 'random', 1: 'adventure', 2: 'sci-fy'}
 game_text_gpt_list = []
 game_user_answers_list = []
 
+whipser = Whisper()
+t2s = T2S()
+
 
 @app.route('/')
 def index():
@@ -20,6 +23,10 @@ def index():
 
 @app.route('/play')
 def play():
+    global chat, t2s
+    game_text_gpt_list.clear()
+    game_user_answers_list.clear()
+
     if 'game_option' in request.args:
         option = request.args['game_option']
     else:
@@ -31,7 +38,6 @@ def play():
     game_text = chat.get_story("Start game")
     game_text_gpt_list.append(game_text)
 
-    t2s = T2S()
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
 
 
@@ -39,23 +45,20 @@ def play():
 
 @app.route('/save-audio', methods=['POST'])
 def save_audio():
-    global game_user_answers_list, game_text_gpt_list
+    global game_user_answers_list, game_text_gpt_list, whisper, chat, t2s
     file = request.files['audio']
     file.save('audio.webm')
-    whipser = Whisper()
     text = whipser.set_input('audio.webm')
     game_user_answers_list.append(text)
     print(text)
     game_text = chat.get_story(text)
     game_text_gpt_list.append(game_text)
     print(game_text)
-    t2s = T2S()
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
     return 'OK'
 
 @app.route('/audio/<path:text>')
 def serve_audio(text):
-    print('serve audio')
     return send_from_directory('./resources/', "audio-answer.mp3")
 
 @app.route('/chat/gpt/newest')

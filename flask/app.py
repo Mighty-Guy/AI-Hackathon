@@ -4,14 +4,13 @@ from classes.whisper import Whisper
 
 from classes.t2s import T2S
 
-chat = ChatGPT()
-game_text = chat.get_story("Start game")
+chat = ""
+game_text = ''
 app = Flask(__name__)
 
 game_options = {0: 'random', 1: 'adventure', 2: 'sci-fy'}
 
 game_text_gpt_list = []
-game_text_gpt_list.append(game_text)
 game_user_answers_list = []
 
 
@@ -25,7 +24,12 @@ def play():
         option = request.args['game_option']
     else:
         option = 0 # default is random
-
+    
+    print('Option: ' + str(option))
+    
+    chat = ChatGPT(option)
+    game_text = chat.get_story("Start game")
+    game_text_gpt_list.append(game_text)
     return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list)
 
 @app.route('/save-audio', methods=['POST'])

@@ -2,19 +2,20 @@ import openai
 import yaml
 from yaml.loader import SafeLoader
 
-initPrompt = [
-    {"role": "system", "content": "You are a storyteller. Generate a text-based game adventure with multiple stages. I can make decisions with free text. Wait for my decision at every stage."}
-]
+initContent = "You are a storyteller. Generate a text-based {} game with multiple stages. I can make decisions with free text. Wait for my decision at every stage."
+
+game_options = {0: '', 1: 'adventure', 2: 'sci-fy'}
 
 
 class ChatGPT():
-    def __init__(self):
+    def __init__(self, game_option=0):
         # Reading YAML data
-        file_name = 'resources/secrets.yml'
+        file_name = 'flask/secrets.yml'
         with open(file_name, 'r') as f:
             secrets = yaml.load(f, Loader=SafeLoader)
         openai.api_key = secrets['chatgpt']
-        self.conversation = initPrompt
+        self.conversation = [{"role": "system", "content": initContent.format(game_options[game_option])}]
+        print(self.conversation)
 
     def get_story(self, prompt):
         self.conversation.append({"role": "user", "content": prompt})
@@ -46,11 +47,11 @@ class ChatGPT():
     def get_conversation(self):
         return self.conversation
 
-    def reset_conversation(self):
-        self.conversation = initPrompt
+    def reset_conversation(self, game_option=0):
+        self.conversation = [{"role": "system", "content": initContent.format(game_options[game_option])}]
 
 
-# chat = ChatGPT()
+chat = ChatGPT(1)
 # chat.get_story("Start game")
 # chat.get_response("Take option 1")
 # print(chat.get_music())

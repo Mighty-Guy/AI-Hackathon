@@ -31,21 +31,20 @@ def play():
     game_user_answers_list.clear()
 
     if 'game_option' in request.args:
-        option = request.args['game_option']
+        option = int(request.args['game_option'])
     else:
         option = 0 # default is random
     
     print('Option: ' + str(option))
     
-    chat = ChatGPT(game_option=int(option))
+    chat = ChatGPT(game_option=option)
     game_text = chat.get_story("Start game")
     game_text_gpt_list.append(game_text)
-    soundcloud_list = soundcloud.search(to_search=...,genres=...,tags=...)
+    soundcloud_list = soundcloud.search(to_search='test',genres='dance',tags='test')
 
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
 
 
-    sound_cloud_id = 
     return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list, sound_cloud_id=soundcloud_list[0])
 
 @app.route('/save-audio', methods=['POST'])

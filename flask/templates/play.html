@@ -37,18 +37,19 @@
         </div>
         <div class="col-6 col-md-6">
             <iframe width="20%" height="166" scrolling="no" allow="autoplay" class="corner-element" style="right: 150px"
-                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{sound_cloud_id}">
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ sound_cloud_id }}">
             </iframe>
         </div>
     </div>
 
 
     <div class="mt-2">
+        <audio controls src="/audio/The best text ever"  autoplay id="gpt-audio"></audio>
         <button id="start-btn" disabled>Start Recording</button>
         <button id="stop-btn" disabled>Stop Recording</button>
     </div>
 </div>
-<audio controls src="/audio/The best text ever"  autoplay id="gpt-audio"></audio>
+
 
 
 <script src="{{url_for('static', filename='audio.js')}}"></script>

@@ -5,7 +5,7 @@ import yaml
 from yaml.loader import SafeLoader
 
 # Reading YAML data
-file_name = 'flask/resources/secrets.yml'
+file_name = 'flask/secrets.yml'
 with open(file_name, 'r') as f:
     secrets = yaml.load(f, Loader=SafeLoader)
 

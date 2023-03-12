@@ -27,9 +27,14 @@ def play():
     
     print('Option: ' + str(option))
     
-    chat = ChatGPT(option)
+    chat = ChatGPT(game_option=int(option))
     game_text = chat.get_story("Start game")
     game_text_gpt_list.append(game_text)
+
+    t2s = T2S()
+    t2s.get_speech(game_text, './resources/audio-answer.mp3')
+
+
     return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list)
 
 @app.route('/save-audio', methods=['POST'])

@@ -100,6 +100,6 @@ stopBtn.addEventListener('click', () => {
 });
 
 window.onload = function() {
-    // audioPlayer.play();
+    audioPlayer.play();
 }
 

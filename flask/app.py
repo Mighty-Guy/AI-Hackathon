@@ -1,9 +1,11 @@
 from flask import Flask, request, send_from_directory, render_template, jsonify
 from classes.chatgpt import ChatGPT
 from classes.whisper import Whisper
+from classes.soundcloud import SoundCloudAPI_V2
 
 from classes.t2s import T2S
 
+soundcloud = SoundCloudAPI_V2()
 chat = ChatGPT()
 game_text = chat.get_story("Start game")
 app = Flask(__name__)
@@ -26,7 +28,8 @@ def play():
     else:
         option = 0 # default is random
 
-    return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list)
+    sound_cloud_id = 
+    return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list, sound_cloud_id=sound_cloud_id)
 
 @app.route('/save-audio', methods=['POST'])
 def save_audio():

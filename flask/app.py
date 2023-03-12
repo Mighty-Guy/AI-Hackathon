@@ -50,6 +50,7 @@ def save_audio():
 
 @app.route('/audio/<path:text>')
 def serve_audio(text):
+    print('serve audio')
     return send_from_directory('./resources/', "audio-answer.mp3")
 
 @app.route('/chat/gpt/newest')

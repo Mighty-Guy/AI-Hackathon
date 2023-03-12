@@ -10,7 +10,7 @@ game_options = {0: '', 1: 'adventure', 2: 'sci-fy'}
 class ChatGPT():
     def __init__(self, game_option=0):
         # Reading YAML data
-        file_name = 'flask/secrets.yml'
+        file_name = 'secrets.yml'
         with open(file_name, 'r') as f:
             secrets = yaml.load(f, Loader=SafeLoader)
         openai.api_key = secrets['chatgpt']

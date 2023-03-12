@@ -19,16 +19,16 @@
     <h2>Story teller:</h2>
     <div class="row d-flex" style="top: 50px; right: 150px">
         <div class="col-6 col-md-6">
-            {% for game_text in game_text_list %}
+            {% for game_text in game_text_gpt_list %}
             <div class="row" id="chat-update">
                 <div class="col-9 text-left mt-2 p-2 bg-secondary">
                     <div>{{ game_text }}</div>
                 </div>
 
-                {% if game_answers_list[loop.index-1] is defined %}
+                {% if game_user_answers_list[loop.index-1] is defined %}
                 <div class="col-9 offset-3 text-right mt-2 p-2 w-75 border align-items-end bg-muted"
                      style="text-align: right; width: 75%">
-                    <p class="text-right ">{{ game_answers_list[loop.index-1] }}</p>
+                    <p class="text-right ">{{ game_user_answers_list[loop.index-1] }}</p>
                 </div>
                 {% endif %}
             </div>
@@ -48,6 +48,7 @@
         <button id="stop-btn" disabled>Stop Recording</button>
     </div>
 </div>
+<audio controls src="/audio/The best text ever"  autoplay id="gpt-audio"></audio>
 
 
 <script src="{{url_for('static', filename='audio.js')}}"></script>

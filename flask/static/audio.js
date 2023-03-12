@@ -3,6 +3,7 @@ let chunks = [];
 
 const startBtn = document.getElementById('start-btn');
 const stopBtn = document.getElementById('stop-btn');
+const audioPlayer = document.getElementById('gpt-audio')
 
 this.updateChat = function () {
     console.log('test')
@@ -43,6 +44,7 @@ this.updateChat = function () {
     });
   });
 };
+
 navigator.mediaDevices.getUserMedia({audio: true})
     .then(stream => {
         mediaRecorder = new MediaRecorder(stream);
@@ -67,13 +69,8 @@ navigator.mediaDevices.getUserMedia({audio: true})
                     if (response.ok) {
                         this.updateChat();
 
-
-                        const audioPlayer = new Audio('/audio/The best text ever');
-                        // audioPlayer.src = URL.createObjectURL(blob);
-                        audioPlayer.controls = true;
-                        audioPlayer.autoplay = true;
-                        audioPlayer.hidden = true;
-                        document.body.appendChild(audioPlayer);
+                        this.audioPlayer.src('/audio/The best text ever')
+                        this.audioPlayer.play()
                     } else {
                         console.error('Failed to save audio');
                     }
@@ -83,6 +80,12 @@ navigator.mediaDevices.getUserMedia({audio: true})
     .catch(error => {
         console.error('Failed to get user media:', error);
     });
+
+audioPlayer.addEventListener('ended', function() {
+  // Enable the button
+  button.disabled = false;
+});
+
 
 startBtn.addEventListener('click', () => {
     startBtn.disabled = true;
@@ -95,4 +98,8 @@ stopBtn.addEventListener('click', () => {
     stopBtn.disabled = true;
     mediaRecorder.stop();
 });
+
+window.onload = function() {
+    // audioPlayer.play();
+}
 

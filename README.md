@@ -1,1 +1,1 @@
-# AI-Hackathon
+![](git-resources/cover_image.png)

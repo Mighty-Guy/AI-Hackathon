@@ -6,15 +6,18 @@ from classes.soundcloud import SoundCloudAPI_V2
 from classes.t2s import T2S
 
 soundcloud = SoundCloudAPI_V2()
-chat = ChatGPT()
-game_text = chat.get_story("Start game")
+chat = ""
+game_text = ''
+
 app = Flask(__name__)
 
 game_options = {0: 'random', 1: 'adventure', 2: 'sci-fy'}
 
 game_text_gpt_list = []
-game_text_gpt_list.append(game_text)
 game_user_answers_list = []
+
+whipser = Whisper()
+t2s = T2S()
 
 
 @app.route('/')
@@ -23,27 +26,38 @@ def index():
 
 @app.route('/play')
 def play():
+    global chat, t2s
+    game_text_gpt_list.clear()
+    game_user_answers_list.clear()
+
     if 'game_option' in request.args:
         option = request.args['game_option']
     else:
         option = 0 # default is random
+    
+    print('Option: ' + str(option))
+    
+    chat = ChatGPT(game_option=int(option))
+    game_text = chat.get_story("Start game")
+    game_text_gpt_list.append(game_text)
+
+    t2s.get_speech(game_text, './resources/audio-answer.mp3')
+
 
     sound_cloud_id = 
     return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list, sound_cloud_id=sound_cloud_id)
 
 @app.route('/save-audio', methods=['POST'])
 def save_audio():
-    global game_user_answers_list, game_text_gpt_list
+    global game_user_answers_list, game_text_gpt_list, whisper, chat, t2s
     file = request.files['audio']
     file.save('audio.webm')
-    whipser = Whisper()
     text = whipser.set_input('audio.webm')
     game_user_answers_list.append(text)
     print(text)
     game_text = chat.get_story(text)
     game_text_gpt_list.append(game_text)
     print(game_text)
-    t2s = T2S()
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
     return 'OK'
 

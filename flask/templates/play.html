@@ -44,6 +44,25 @@
             <iframe width="20%" height="166" scrolling="no" allow="autoplay" class="corner-element"
                     src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ sound_cloud_id }}">
             </iframe>
+            <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            var iframeElement   = document.querySelector('iframe');
+            var iframeElementID = iframeElement.id;
+            var widget         = SC.Widget(iframeElement);
+            var x = document.getElementById("play");
+
+            widget.bind(SC.Widget.Events.READY, function() {
+              // set new volume level
+              if ("{{ play_music }}" == "True") {
+                widget.play();
+                widget.setVolume(4);
+              }
+              if ("{{ play_music }}" == "False") {
+                widget.pause();
+              }
+            });
+            </script>
         </div>
     </div>
 

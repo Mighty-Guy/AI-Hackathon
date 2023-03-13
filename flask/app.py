@@ -47,7 +47,7 @@ def play():
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
 
 
-    return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list, sound_cloud_id=soundcloud_list[0])
+    return render_template('play.html', game_text_gpt_list=game_text_gpt_list, game_user_answers_list=game_user_answers_list, sound_cloud_id=soundcloud_list[0], play_music=True)
 
 @app.route('/save-audio', methods=['POST'])
 def save_audio():

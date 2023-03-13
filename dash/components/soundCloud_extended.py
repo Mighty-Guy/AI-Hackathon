@@ -1,6 +1,4 @@
-
 from sclib import SoundcloudAPI, Track, Playlist
-import sclib
 import sys
 import json
 from ssl import SSLContext
@@ -37,26 +35,25 @@ def get_ssl_setting():
     return SSLContext()
 
 
-class SoundCloud_ext(SoundcloudAPI):
+class SoundCloudAPI_V2(SoundcloudAPI):
 
-
-    SEARCH_URL_V5 = "https://api-v2.soundcloud.com/search?q={query}&genres={genres}&tags={tags}&client_id={client_id}&limit={limit}"
+    SEARCH_URL_V2 = "https://api-v2.soundcloud.com/search?q={query}&genres={genres}&tags={tags}&client_id={client_id}&limit={limit}"
 
     def search(self, to_search, genres, tags='scary', limit=10):
         """ Resolve url """
         if not self.client_id:
             self.get_credentials()
-        url = self.SEARCH_URL_V5.format(
+        url = self.SEARCH_URL_V2.format(
             query=to_search,
             limit=limit,
             genres=genres,
             tags=tags,
             client_id=self.client_id
         )
-        print(url)
         track_list = []
         obj = get_obj_from(url)
         for song in obj['collection']:
-            if song['track_format'] == 'single-track':
-                track_list.append((song['permalink_url'])
+            if 'track_format' in song:
+                if song['track_format'] == 'single-track':
+                    track_list.append(song['id'])
         return track_list

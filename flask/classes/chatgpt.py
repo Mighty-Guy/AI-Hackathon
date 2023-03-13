@@ -1,6 +1,5 @@
 import openai
-import yaml
-from yaml.loader import SafeLoader
+from get_docker_secret import get_docker_secret
 
 initContent = "You are a storyteller. Generate a text-based {} game with multiple stages. I can make decisions with free text. Wait for my decision at every stage."
 
@@ -9,11 +8,7 @@ game_options = {0: '', 1: 'adventure', 2: 'sci-fy'}
 
 class ChatGPT():
     def __init__(self, game_option=0):
-        # Reading YAML data
-        file_name = 'secrets.yml'
-        with open(file_name, 'r') as f:
-            secrets = yaml.load(f, Loader=SafeLoader)
-        openai.api_key = secrets['chatgpt']
+        openai.api_key = get_docker_secret('CHATGPT_SECRET', default='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')
         self.conversation = [{"role": "system", "content": initContent.format(game_options[game_option])}]
         print(self.conversation)
 

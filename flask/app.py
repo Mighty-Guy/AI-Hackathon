@@ -2,7 +2,6 @@ from flask import Flask, request, send_from_directory, render_template, jsonify
 from classes.chatgpt import ChatGPT
 from classes.whisper import Whisper
 from classes.soundcloud import SoundCloudAPI_V2
-import os
 from classes.t2s import T2S
 
 soundcloud = SoundCloudAPI_V2()

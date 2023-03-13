@@ -8,3 +8,6 @@ flask/__pycache__/*
 dash/__pycache__/*
 flask/classes/__pycache__/*
 **__pycache__/*
+flask/classes/__pycache__/*
+flask/resources/audio-answer.mp3
+flask/classes/__pycache__/chatgpt.cpython-310.pyc

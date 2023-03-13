@@ -40,7 +40,9 @@ def play():
     chat = ChatGPT(game_option=option)
     game_text = chat.get_story("Start game")
     game_text_gpt_list.append(game_text)
-    soundcloud_list = soundcloud.search(to_search='test',genres='dance',tags='test')
+    music_genre = chat.get_music()
+    print(music_genre)
+    soundcloud_list = soundcloud.search(to_search=music_genre, genres=music_genre)
 
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
 

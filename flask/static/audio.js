@@ -107,8 +107,9 @@ audioPlayer.addEventListener('loadedmetadata', function() {
 
 window.onload = function() {
   // Start playing the audio file
-  audioPlayer.play();
-  console.log('played')
+    startBtn.disabled=false;
+    audioPlayer.play();
+    console.log('played')
 };
 
 

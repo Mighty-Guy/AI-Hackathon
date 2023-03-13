@@ -4,10 +4,7 @@ let chunks = [];
 const startBtn = document.getElementById('start-btn');
 const stopBtn = document.getElementById('stop-btn');
 const audioPlayer = document.getElementById('gpt-audio');
-const iframeElement   = document.getElementById('soundcloud-iframe');
-// var iframeElementID = iframeElement.id;
-const widget         = SC.Widget(iframeElement);
-const x = document.getElementById("play");
+let i = 0
 
 this.updateChat = function () {
     console.log('test')
@@ -26,27 +23,36 @@ this.updateChat = function () {
             "                     style=\"text-align: right; width: 75%\">\n" +
             "                    <p class=\"text-right \">" + response.text + "</p>\n" +
             "                </div>");
+
+        $(document).ready(function() {
+        // AJAX-Anfrage an den Flask-Server senden
+        $.ajax({
+          url: "/chat/gpt/newest", // URL des Flask-Endpunkts, der die Liste zurückgibt
+          type: "GET",
+          dataType: "json", // Datenformat, das vom Server zurückgegeben wird (JSON in diesem Beispiel)
+          success: function(response) {
+            // Funktion, die ausgeführt wird, wenn die AJAX-Anfrage erfolgreich ist
+            console.log(response)
+
+            // Aktualisieren des Inhalts des Divs mit der generierten HTML-Liste
+            $("#chat-update").append("<div class=\"col-9 text-left mt-2 p-2 bg-secondary\">"+
+                        "<div>" + response.text + "</div>" +
+                    "</div>");
+
+            i++;
+            audioPlayer.src = '/audio/song' + i;
+            audioPlayer.load();
+            audioPlayer.autoplay = true;
+
+          }
+        });
+      });
+
       }
     });
   });
 
-    $(document).ready(function() {
-    // AJAX-Anfrage an den Flask-Server senden
-    $.ajax({
-      url: "/chat/gpt/newest", // URL des Flask-Endpunkts, der die Liste zurückgibt
-      type: "GET",
-      dataType: "json", // Datenformat, das vom Server zurückgegeben wird (JSON in diesem Beispiel)
-      success: function(response) {
-        // Funktion, die ausgeführt wird, wenn die AJAX-Anfrage erfolgreich ist
-        console.log(response)
 
-        // Aktualisieren des Inhalts des Divs mit der generierten HTML-Liste
-        $("#chat-update").append("<div class=\"col-9 text-left mt-2 p-2 bg-secondary\">"+
-                    "<div>" + response.text + "</div>" +
-                "</div>");
-      }
-    });
-  });
     startBtn.disabled = false
 };
 navigator.mediaDevices.getUserMedia({audio: true})
@@ -72,8 +78,6 @@ navigator.mediaDevices.getUserMedia({audio: true})
                 .then(response => {
                     if (response.ok) {
                         this.updateChat();
-                        audioPlayer.load();
-                        audioPlayer.autoplay = true;
                     } else {
                         console.error('Failed to save audio');
                     }
@@ -103,8 +107,6 @@ audioPlayer.addEventListener('loadedmetadata', function() {
   audioPlayer.play();
 });
 
-
-
 window.onload = function() {
   // Start playing the audio file
     startBtn.disabled=false;
@@ -112,16 +114,4 @@ window.onload = function() {
     console.log('played')
 };
 
-
-
-widget.onload = function() {
-  // set new volume level
-
-    console.log('test play');
-    widget.play();
-    widget.setVolume(4);
-
-};
-widget.play();
-widget.setVolume(4);
 

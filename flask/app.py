@@ -35,13 +35,11 @@ def play():
     else:
         option = 0 # default is random
     
-    print('Option: ' + str(option))
-    
+
     chat = ChatGPT(game_option=option)
     game_text = chat.get_story("Start game")
     game_text_gpt_list.append(game_text)
     music_genre = chat.get_music()
-    print(music_genre)
     soundcloud_list = soundcloud.search(to_search=music_genre, genres=music_genre)
 
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
@@ -56,10 +54,8 @@ def save_audio():
     file.save('audio.webm')
     text = whipser.set_input('audio.webm')
     game_user_answers_list.append(text)
-    print(text)
     game_text = chat.get_story(text)
     game_text_gpt_list.append(game_text)
-    print(game_text)
     t2s.get_speech(game_text, './resources/audio-answer.mp3')
     return 'OK'
 

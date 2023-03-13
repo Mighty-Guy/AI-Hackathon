@@ -4,6 +4,10 @@ let chunks = [];
 const startBtn = document.getElementById('start-btn');
 const stopBtn = document.getElementById('stop-btn');
 const audioPlayer = document.getElementById('gpt-audio');
+const iframeElement   = document.getElementById('soundcloud-iframe');
+// var iframeElementID = iframeElement.id;
+const widget         = SC.Widget(iframeElement);
+const x = document.getElementById("play");
 
 this.updateChat = function () {
     console.log('test')
@@ -83,6 +87,7 @@ navigator.mediaDevices.getUserMedia({audio: true})
 startBtn.addEventListener('click', () => {
     startBtn.disabled = true;
     stopBtn.disabled = false;
+    widget.pause();
     chunks = [];
     mediaRecorder.start();
 });
@@ -90,14 +95,32 @@ startBtn.addEventListener('click', () => {
 stopBtn.addEventListener('click', () => {
     stopBtn.disabled = true;
     mediaRecorder.stop();
+    //todo update song
+    widget.play();
 });
 
 audioPlayer.addEventListener('loadedmetadata', function() {
   audioPlayer.play();
 });
 
+
+
 window.onload = function() {
   // Start playing the audio file
   audioPlayer.play();
+  console.log('played')
 };
+
+
+
+widget.onload = function() {
+  // set new volume level
+
+    console.log('test play');
+    widget.play();
+    widget.setVolume(4);
+
+};
+widget.play();
+widget.setVolume(4);
 

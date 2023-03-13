@@ -1,4 +1,5 @@
 import openai
+import os
 from get_docker_secret import get_docker_secret
 
 initContent = "You are a storyteller. Generate a text-based {} game with multiple stages. I can make decisions with free text. Wait for my decision at every stage."
@@ -8,7 +9,7 @@ game_options = {0: '', 1: 'adventure', 2: 'sci-fy'}
 
 class ChatGPT():
     def __init__(self, game_option=0):
-        openai.api_key = get_docker_secret('CHATGPT_SECRET')
+        openai.api_key = os.environ['CHATGPT_SECRET']
         self.conversation = [{"role": "system", "content": initContent.format(game_options[game_option])}]
         print(self.conversation)
 

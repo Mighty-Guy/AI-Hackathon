@@ -8,7 +8,7 @@ from get_docker_secret import get_docker_secret
 class Whisper:
 
     def __init__(self):
-        os.environ["REPLICATE_API_TOKEN"] = get_docker_secret('WHISPER_SECRET', default='5f07fcf4710846c9b121590ac338ff2e2ffa676d')
+        os.environ["REPLICATE_API_TOKEN"] = os.environ['WHISPER_SECRET']
         self.model = replicate.models.get("openai/whisper")
         self.version = self.model.versions.get("e39e354773466b955265e969568deb7da217804d8e771ea8c9cd0cef6591f8bc")
 

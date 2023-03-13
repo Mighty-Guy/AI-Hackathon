@@ -1,8 +1,6 @@
 import replicate
 import os
-
 import yaml
-from get_docker_secret import get_docker_secret
 
 
 class Whisper:

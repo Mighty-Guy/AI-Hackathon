@@ -1,6 +1,5 @@
 import openai
 import os
-from get_docker_secret import get_docker_secret
 
 initContent = "You are a storyteller. Generate a text-based {} game with multiple stages. I can make decisions with free text. Wait for my decision at every stage."
 

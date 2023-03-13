@@ -19,7 +19,7 @@ this.updateChat = function () {
         console.log(response)
 
         // Aktualisieren des Inhalts des Divs mit der generierten HTML-Liste
-        $("#chat-update").append("<div class=\"col-9 offset-3 text-right mt-2 p-2 w-75 border align-items-end bg-muted\"\n" +
+        $("#chat-update").append("<div class=\"col-9 offset-3 text-right mt-2 p-2 w-75 border rounded align-items-end bg-muted\"\n" +
             "                     style=\"text-align: right; width: 75%\">\n" +
             "                    <p class=\"text-right \">" + response.text + "</p>\n" +
             "                </div>");
@@ -35,7 +35,7 @@ this.updateChat = function () {
             console.log(response)
 
             // Aktualisieren des Inhalts des Divs mit der generierten HTML-Liste
-            $("#chat-update").append("<div class=\"col-9 text-left mt-2 p-2 bg-secondary\">"+
+            $("#chat-update").append("<div class=\"col-9 text-left mt-2 p-2 rounded bg-secondary\">"+
                         "<div>" + response.text + "</div>" +
                     "</div>");
 

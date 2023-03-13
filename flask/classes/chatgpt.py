@@ -8,7 +8,7 @@ game_options = {0: '', 1: 'adventure', 2: 'sci-fy'}
 
 class ChatGPT():
     def __init__(self, game_option=0):
-        openai.api_key = get_docker_secret('CHATGPT_SECRET', default='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')
+        openai.api_key = get_docker_secret('CHATGPT_SECRET')
         self.conversation = [{"role": "system", "content": initContent.format(game_options[game_option])}]
         print(self.conversation)
 
